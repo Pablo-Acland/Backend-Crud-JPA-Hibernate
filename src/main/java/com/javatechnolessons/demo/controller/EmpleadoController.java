@@ -2,6 +2,7 @@ package com.javatechnolessons.demo.controller;
 
 import java.util.*;
 import com.javatechnolessons.demo.model.Empleado;
+import com.javatechnolessons.demo.model.Role;
 import com.javatechnolessons.demo.repository.EmpleadoJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
-@RequestMapping("/Empleado")
+@RequestMapping("/Emp")
 public class EmpleadoController {
 
     @Autowired
@@ -44,9 +45,10 @@ public class EmpleadoController {
     }
 
     @PostMapping("/Empleado")
-    public ResponseEntity<Empleado> createTutorial(@RequestBody Empleado empleado) {
+    public ResponseEntity<Empleado> createEmpleado(@RequestBody Empleado empleado) {
         try {
-            Empleado empleado2 = empleadoJpaRepository.save(new Empleado(empleado.getFirstName(), empleado.getLastName(), empleado.getEmployeeid(), empleado.getRole()));
+            Empleado empleado2 = empleadoJpaRepository.save(new Empleado(empleado.getFirstName(), empleado.getLastName(),
+                    empleado.getEmployeeid(), empleado.getRole()));
             return new ResponseEntity<>(empleado2, HttpStatus.CREATED);
         } catch (Exception err) {
             return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
